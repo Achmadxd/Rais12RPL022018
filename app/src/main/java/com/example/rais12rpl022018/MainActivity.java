@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        etEmail = findViewById(R.id.txtEmail);
+        etEmail = findViewById(R.id.txtUsername);
         etPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
