@@ -36,7 +36,7 @@ public class RegisterActivity extends Activity {
 
         txtNama = findViewById(R.id.txtNama);
         txtEmail = findViewById(R.id.txtEmail);
-        txtPassword = findViewById(R.id.txtPasswordemail);
+        txtPassword = findViewById(R.id.txtPassword);
         txtNoktp = findViewById(R.id.txtNoktp);
         txtNohp = findViewById(R.id.txtNohp);
         txtAlamat = findViewById(R.id.txtAlamat);

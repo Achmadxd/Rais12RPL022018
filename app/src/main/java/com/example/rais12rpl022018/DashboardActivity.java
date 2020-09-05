@@ -21,8 +21,9 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard_page);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
-
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Rental Sepeda");
 
     }
