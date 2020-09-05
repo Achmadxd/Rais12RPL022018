@@ -9,6 +9,12 @@
     android:gravity="center"
     tools:context=".RegisterActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REGISTRASI"
+        android:textAlignment="center"></TextView>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
