@@ -23,7 +23,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.dashboard_page);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Rental Sepeda");
 
     }

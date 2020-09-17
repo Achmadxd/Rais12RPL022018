@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
 
-        if(sp.getBoolean("logged",true)){
+        if(sp.getBoolean("logged",false)){
             Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
                         .getAsJSONObject(new JSONObjectRequestListener() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Log.d("hasil", "onResponse: ");
+                                Log.d("hasil", "onResponse: " + response );
                                 try {
-                                    JSONObject PAYLOAD = response.getJSONObject("PAYLOAD");
+                                    JSONObject PAYLOAD = response.getJSONObject("hasil");
                                     boolean sukses = PAYLOAD.getBoolean("respon");
                                     String roleuser = PAYLOAD.getString("roleuser");
                                     Log.d("PAYLOAD", "onResponse: " + PAYLOAD);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                         progressDialog.dismiss();
-                                    } else {
+                                    } else if(!sukses) {
                                         Toast.makeText(MainActivity.this, "gagal", Toast.LENGTH_SHORT).show();
                                         progressDialog.dismiss();
                                     }
@@ -97,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onError(ANError anError) {
+                                Log.d("Soy", "onError: " + anError.getErrorBody());
+                                Log.d("Soy", "onError: " + anError.getLocalizedMessage());
+                                Log.d("Soy", "onError: " + anError.getErrorDetail());
+                                Log.d("Soy", "onError: " + anError.getResponse());
+                                Log.d("Soy  ", "onError: " + anError.getErrorCode());
                                 progressDialog.dismiss();
                             }
                         });

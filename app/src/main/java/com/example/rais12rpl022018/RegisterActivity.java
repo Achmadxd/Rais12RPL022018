@@ -36,7 +36,7 @@ public class RegisterActivity extends Activity {
 
         txtNama = findViewById(R.id.txtNama);
         txtEmail = findViewById(R.id.txtEmail);
-        txtPassword = findViewById(R.id.txtPassword);
+        txtPassword = findViewById(R.id.txtPasswordemail);
         txtNoktp = findViewById(R.id.txtNoktp);
         txtNohp = findViewById(R.id.txtNohp);
         txtAlamat = findViewById(R.id.txtAlamat);
@@ -53,7 +53,7 @@ public class RegisterActivity extends Activity {
                 String password = txtPassword.getText().toString().trim();
                 progressDialog.setTitle("Register In...");
                 progressDialog.show();
-                AndroidNetworking.post(BaseUrl.url + "login.php")
+                AndroidNetworking.post(BaseUrl.url + "registrasi.php")
                         .addBodyParameter("noktp", noKtp)
                         .addBodyParameter("email", email)
                         .addBodyParameter("password", password)
@@ -65,10 +65,10 @@ public class RegisterActivity extends Activity {
                         .getAsJSONObject(new JSONObjectRequestListener() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Log.d("hasil", "onResponse: ");
+                                Log.d("hasil",  "onResponse: " + response);
                                 try {
-                                    JSONObject status = response.getJSONObject("STATUS");
-                                    JSONObject message = response.getJSONObject("MESSAGE");
+                                    String status = response.getString("STATUS");
+                                    String message = response.getString("MESSAGE");
                                     Log.d("STATUS", "onResponse: " + status);
                                     if (status.equals("SUCCESS")) {
                                         sp.edit().putBoolean("logged",true).apply();
@@ -87,7 +87,12 @@ public class RegisterActivity extends Activity {
 
                             @Override
                             public void onError(ANError anError) {
-
+                                Log.d("Soy", "onError: " + anError.getErrorBody());
+                                Log.d("Soy", "onError: " + anError.getLocalizedMessage());
+                                Log.d("Soy", "onError: " + anError.getErrorDetail());
+                                Log.d("Soy", "onError: " + anError.getResponse());
+                                Log.d("Soy  ", "onError: " + anError.getErrorCode());
+                                progressDialog.dismiss();
                             }
                         });
 
