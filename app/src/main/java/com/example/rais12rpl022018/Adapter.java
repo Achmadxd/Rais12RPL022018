@@ -1,9 +1,11 @@
 package com.example.rais12rpl022018;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -31,9 +33,22 @@ public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserViewHolder holder, final int position) {
         holder.tvNama.setText(dataList.get(position).getNama());
         holder.tvEmail.setText(dataList.get(position).getEmail());
+        holder.cvInbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), EditData.class);
+                intent.putExtra("id", dataList.get(position).getId());
+                intent.putExtra("nama", dataList.get(position).getNama());
+                intent.putExtra("email", dataList.get(position).getEmail());
+                intent.putExtra("nohp", dataList.get(position).getNohp());
+                intent.putExtra("alamat", dataList.get(position).getAlamat());
+                intent.putExtra("noktp", dataList.get(position).getNoktp());
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

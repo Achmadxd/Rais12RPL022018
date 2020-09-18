@@ -45,8 +45,7 @@ public class DataCustomer extends AppCompatActivity {
         datalist = new ArrayList<>();
         Log.d("geo", "onCreate: ");
 
-        AndroidNetworking.post(BaseUrl.url + "datacustomer.php")
-                .addBodyParameter("roleuser", "2")
+        AndroidNetworking.get(BaseUrl.url + "viewdata.php")
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -54,14 +53,19 @@ public class DataCustomer extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray data = response.getJSONArray("PAYLOAD");
+                            System.out.println(response);
+                            JSONArray data = response.getJSONArray("result");
 
                             for (int i = 0; i < data.length(); i++) {
 
                                 Model model = new Model();
                                 JSONObject object = data.getJSONObject(i);
-                                model.setNama(object.getString("nama"));
+                                model.setId(object.getString("id"));
                                 model.setEmail(object.getString("email"));
+                                model.setNama(object.getString("nama"));
+                                model.setNohp(object.getString("nohp"));
+                                model.setAlamat(object.getString("alamat"));
+                                model.setNoktp(object.getString("noktp"));
                                 datalist.add(model);
 
                             }
