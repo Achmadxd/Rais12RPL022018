@@ -2,6 +2,7 @@ package com.example.rais12rpl022018;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +22,7 @@ import org.json.JSONObject;
 public class EditData extends AppCompatActivity {
 
     TextView txtId;
-    EditText txtNama, txtEmail, txtNoktp, txtNohp, txtAlamat;
+    EditText txtKode, txtJenis, txtMerk, txtWarna, txtSewa;
     Button btnEdit;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,48 +30,48 @@ public class EditData extends AppCompatActivity {
         setContentView(R.layout.data_edit);
 
         txtId = findViewById(R.id.txtId);
-        txtNama = findViewById(R.id.txtNama);
-        txtEmail = findViewById(R.id.txtEmail);
-        txtNoktp = findViewById(R.id.txtNoktp);
-        txtNohp = findViewById(R.id.txtNohp);
-        txtAlamat = findViewById(R.id.txtAlamat);
+        txtKode = findViewById(R.id.txtKode);
+        txtJenis = findViewById(R.id.txtJenis);
+        txtMerk = findViewById(R.id.txtMerk);
+        txtWarna = findViewById(R.id.txtWarna);
+        txtSewa = findViewById(R.id.txtHargaSewa);
         btnEdit = findViewById(R.id.btnEdit);
 
         Bundle extras = getIntent().getExtras();
-        final String id = extras.getString("id");
-        final String nama = extras.getString("nama");
-        final String email = extras.getString("email");
-        final String nohp = extras.getString("nohp");
-        final String alamat = extras.getString("alamat");
-        final String noktp = extras.getString("noktp");
+        final String id = String.valueOf(extras.getInt("id"));
+        final String kode = extras.getString("kode");
+        final String jenis = extras.getString("jenis");
+        final String merk = extras.getString("merk");
+        final String warna = extras.getString("warna");
+        final String sewa = String.valueOf(extras.getInt("sewa"));
 
         txtId.setText("Id :" + id);
-        txtNama.setText(nama);
-        txtEmail.setText(email);
-        txtNohp.setText(nohp);
-        txtAlamat.setText(alamat);
-        txtNoktp.setText(noktp);
+        txtKode.setText(kode);
+        txtJenis.setText(jenis);
+        txtWarna.setText(warna);
+        txtSewa.setText(sewa);
+        txtMerk.setText(merk);
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AndroidNetworking.post(BaseUrl.url + "edit_data.php")
+                Log.d("clicked", "yes");
+                AndroidNetworking.post(BaseUrl.url + "update_data.php")
                         .addBodyParameter("id", id)
-                        .addBodyParameter("nama", txtNama.getText().toString())
-                        .addBodyParameter("email", txtEmail.getText().toString())
-                        .addBodyParameter("nohp", txtNohp.getText().toString())
-                        .addBodyParameter("alamat", txtAlamat.getText().toString())
-                        .addBodyParameter("noktp", txtNoktp.getText().toString())
+                        .addBodyParameter("kode", txtKode.getText().toString())
+                        .addBodyParameter("merk", txtMerk.getText().toString())
+                        .addBodyParameter("jenis", txtJenis.getText().toString())
+                        .addBodyParameter("warna", txtWarna.getText().toString())
+                        .addBodyParameter("hargasewa", txtSewa.getText().toString())
                         .setPriority(Priority.LOW)
                         .build()
                         .getAsJSONObject(new JSONObjectRequestListener() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    JSONObject hasil = response.getJSONObject("hasil");
-                                    boolean sukses = hasil.getBoolean("respon");
-                                    if (sukses) {
-                                        Intent returnIntent = new Intent(EditData.this, DataCustomer.class);
+                                    String status = response.getString("STATUS");
+                                    if (status.equals("SUCCESS")) {
+                                        Intent returnIntent = new Intent(EditData.this, ViewData.class);
                                         returnIntent.putExtra("refresh", "refresh");
                                         startActivity(returnIntent);
                                         finish();
@@ -85,7 +86,7 @@ public class EditData extends AppCompatActivity {
 
                             @Override
                             public void onError(ANError anError) {
-
+                                Log.d("eror", anError.getErrorBody());
                             }
                         });
             }

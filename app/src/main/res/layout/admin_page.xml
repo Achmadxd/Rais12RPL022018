@@ -19,14 +19,25 @@
         android:background="@color/colorPrimary"/>
 
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnSepeda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:text="Logout"
+        android:text="Data Sepeda"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Logout"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

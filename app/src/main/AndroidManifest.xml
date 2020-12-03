@@ -5,17 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:label="Sepeda Rental"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".DataCustomer" />
-        <activity android:name=".EditData" />
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".EditCustomer"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ViewData" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".AdminActivity">
+        </activity>
+        <activity android:name=".DataCustomer" />
+        <activity android:name=".AddData" />
+        <activity android:name=".EditData" />
     </application>
 
 </manifest>

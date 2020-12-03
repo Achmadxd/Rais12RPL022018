@@ -1,19 +1,20 @@
 package com.example.rais12rpl022018;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,28 +22,42 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class DataCustomer extends AppCompatActivity {
+public class ViewData extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Adapter adapter;
+    private AdapterSepeda adapter;
 
-    ArrayList<Model> datalist;
+    ArrayList<modelsepeda> datalist = new ArrayList<>();
 
-    TextView tvNama, tvEmail;
+    TextView tvKode;
+    TextView tvMerk;
+    FloatingActionButton btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.datacostumer_page);
+        setContentView(R.layout.activity_view_data);
 
-        tvNama = findViewById(R.id.tvNama);
-        tvEmail = findViewById(R.id.tvEmail);
-        recyclerView = findViewById(R.id.listCustomer);
 
-        datalist = new ArrayList<>();
-        Log.d("geo", "onCreate: ");
+        tvKode = findViewById(R.id.tvKode);
+        tvMerk = findViewById(R.id.tvMerk);
+        recyclerView = findViewById(R.id.rvSepedaManage);
+        btnAdd = findViewById(R.id.btn_add_sepeda);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        AndroidNetworking.get(BaseUrl.url + "viewdata.php")
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewData.this, AddData.class);
+                if (datalist.size() != 0) {
+                    int id = datalist.get(datalist.size()-1).getId();
+                    intent.putExtra("id", id);
+                }
+                startActivity(intent);
+            }
+        });
+
+        AndroidNetworking.get(BaseUrl.url + "viewdataSepeda.php")
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -55,27 +70,22 @@ public class DataCustomer extends AppCompatActivity {
 
                             for (int i = 0; i < data.length(); i++) {
 
-                                Model model = new Model();
+                                modelsepeda model = new modelsepeda();
                                 JSONObject object = data.getJSONObject(i);
-                                model.setId(object.getString("id"));
-                                model.setEmail(object.getString("email"));
-                                model.setNama(object.getString("nama"));
-                                model.setNohp(object.getString("nohp"));
-                                model.setAlamat(object.getString("alamat"));
-                                model.setNoktp(object.getString("noktp"));
+                                model.setId(object.getInt("id"));
+                                model.setKode(object.getString("kode"));
+                                model.setMerk(object.getString("merk"));
+                                model.setJenis(object.getString("jenis"));
+                                model.setWarna(object.getString("warna"));
+                                model.setHargasewa(object.getInt("hargasewa"));
                                 datalist.add(model);
-
                             }
 
-                            adapter = new Adapter(datalist);
+                            adapter = new AdapterSepeda(getApplicationContext(), datalist);
 
-                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(DataCustomer.this);
-
-                            recyclerView.setLayoutManager(layoutManager);
+                            //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view_data.this);
 
                             recyclerView.setAdapter(adapter);
-
-                            Log.d("pay1", "onResponse: " + response.getJSONArray("PAYLOAD"));
 
                             if (response.getJSONArray("PAYLOAD").length() == 0){
 

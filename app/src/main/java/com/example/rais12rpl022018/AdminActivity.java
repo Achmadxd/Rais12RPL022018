@@ -1,6 +1,5 @@
 package com.example.rais12rpl022018;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminActivity extends AppCompatActivity {
     SharedPreferences sp;
-    Button btnData, btnLogout;
+    Button btnData, btnLogout, btnSepeda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +19,22 @@ public class AdminActivity extends AppCompatActivity {
 
         btnData = findViewById(R.id.btnData);
         btnLogout = findViewById(R.id.btnLogout);
+        btnSepeda = findViewById(R.id.btnSepeda);
 
         btnData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, DataCustomer.class);
+                startActivity(intent);
+            }
+        });
+
+        btnSepeda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this,
+
+                        ViewData.class);
                 startActivity(intent);
             }
         });

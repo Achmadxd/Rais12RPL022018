@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -39,7 +38,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.UserViewHolder> {
         holder.cvInbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), EditData.class);
+                Intent intent = new Intent(view.getContext(), EditCustomer.class);
                 intent.putExtra("id", dataList.get(position).getId());
                 intent.putExtra("nama", dataList.get(position).getNama());
                 intent.putExtra("email", dataList.get(position).getEmail());

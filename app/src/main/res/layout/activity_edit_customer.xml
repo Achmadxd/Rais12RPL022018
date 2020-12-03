@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".RegisterActivity">
+    android:layout_height="match_parent"
+    tools:context=".EditCustomer">
 
     <TextView
         android:layout_width="match_parent"
@@ -27,34 +26,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:hint="Kode"
-        android:id="@+id/txtKode"/>
+        android:hint="Nama"
+        android:id="@+id/txtNama"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:hint="Merk"
+        android:hint="Email"
         android:inputType="textEmailAddress"
-        android:id="@+id/txtMerk"/>
+        android:id="@+id/txtEmail"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:hint="Jenis"
-        android:id="@+id/txtJenis"/>
+        android:hint="No KTP"
+        android:id="@+id/txtNoktp"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:hint="Warna"
-        android:id="@+id/txtWarna"/>
+        android:hint="No Hp"
+        android:id="@+id/txtNohp"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:hint="Harga Sewa"
-        android:inputType="number"
-        android:id="@+id/txtHargaSewa"/>
+        android:hint="Alamat"
+        android:id="@+id/txtAlamat"/>
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="match_parent"
@@ -63,6 +61,8 @@
         android:layout_marginTop="50dp"
         android:textColor="@android:color/white"
         android:background="@drawable/button"
-        android:text="Update"/>
+        android:text="CLICK"/>
+
+
 
 </LinearLayout>
